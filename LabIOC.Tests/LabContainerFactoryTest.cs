@@ -76,4 +76,13 @@ public class LabContainerFactoryTest
             x.InterfaceType.IsAssignableTo(typeof(IIocTest))
             && x.ImplementationType.IsAssignableTo(typeof(IocTestClass)));
     }
+
+    [Fact]
+    public void Register_UnimplementedInterface_ThrowsException()
+    {
+        Assert.Throws<InterfaceNotImplementedException>(() =>
+        {
+            _testee.Register(typeof(INotImplemented), typeof(IocTestClass));
+        });
+    }
 }

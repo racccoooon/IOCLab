@@ -15,7 +15,7 @@ public class LabContainerFactory
 
     public LabContainer Build()
     {
-        return new LabContainer();
+        return new LabContainer(_registeredTypes);
     }
 
     public LabContainerFactory Register(Type type)
@@ -25,6 +25,8 @@ public class LabContainerFactory
 
     public LabContainerFactory Register(Type interfaceType, Type implementationType)
     {
+        if (!implementationType.IsAssignableTo(interfaceType))
+            throw new InterfaceNotImplementedException(interfaceType, implementationType);
         _registeredTypes.Add(new IocMapping(interfaceType, implementationType));
         return this;
     }

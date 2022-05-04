@@ -2,10 +2,12 @@
 
 public interface IIocTest
 {
-    
 }
 
-public class IocTestClass
+public interface INotImplemented
 {
-    
+}
+
+public class IocTestClass : IIocTest
+{
 }
