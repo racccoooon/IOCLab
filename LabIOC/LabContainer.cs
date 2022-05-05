@@ -1,4 +1,6 @@
-﻿namespace LabIOC;
+﻿using BindingFlags = System.Reflection.BindingFlags;
+
+namespace LabIOC;
 
 public class LabContainer
 {
@@ -16,6 +18,25 @@ public class LabContainer
 
     public object Get(Type type)
     {
-        throw new NotImplementedException();
+        var mapping = _mappings.FirstOrDefault(x => x.InterfaceType == type);
+        if (mapping == null)
+            throw new TypeNotRegisteredException(type);
+
+        if (mapping.ImplementationType.GetConstructors().Count() > 1)
+            throw new NoSuitableConstructorFoundException(type);
+        
+        var constructor = mapping.ImplementationType.GetConstructors().FirstOrDefault();
+        if (constructor == null)
+            throw new NoSuitableConstructorFoundException(type);
+
+        var parameters = new List<object>();
+        foreach (var parameterInfo in constructor.GetParameters())
+        {
+            parameters.Add(Get(parameterInfo.ParameterType));
+        }
+        
+        var result = constructor.Invoke(parameters.ToArray());
+        return result;
+        // return new IocTestClass();
     }
 }

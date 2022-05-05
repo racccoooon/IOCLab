@@ -34,11 +34,57 @@ public class LabContainerTest
     }
 
     [Fact]
+    public void Get_RegisteredType_ThrowsException()
+    {
+        var factory = LabContainerFactory.Create()
+            .Register(typeof(IocTestClass));
+        var testee = factory.Build();
+        Assert.Throws<TypeNotRegisteredException>(() =>
+        {
+            testee.Get(typeof(string));
+        });
+    }
+    
+    [Fact]
     public void Get_RegisteredType_Succeeds()
     {
         var factory = LabContainerFactory.Create()
             .Register(typeof(IocTestClass));
         var testee = factory.Build();
         testee.Get(typeof(IocTestClass));
+    }
+
+    [Fact]
+    public void Get_NoPublicConstructor_ThrowsException()
+    {
+        var factory = LabContainerFactory.Create()
+            .Register(typeof(NoPublicConstructor));
+        var testee = factory.Build();
+        Assert.Throws<NoSuitableConstructorFoundException>(() =>
+        {
+            testee.Get(typeof(NoPublicConstructor));
+        });
+    }
+
+    [Fact]
+    public void Get_TooManyConstructors_ThrowsException()
+    {
+        var factory = LabContainerFactory.Create()
+            .Register(typeof(TooManyConstructors));
+        var testee = factory.Build();
+        Assert.Throws<NoSuitableConstructorFoundException>(() =>
+        {
+            testee.Get(typeof(TooManyConstructors));
+        });
+    }
+
+    [Fact]
+    public void Get_HierarchicalStructure_Succeeds()
+    {
+        var factory = LabContainerFactory.Create()
+            .Register(typeof(Parent))
+            .Register(typeof(Child));
+        var testee = factory.Build();
+        testee.Get(typeof(Parent));
     }
 }

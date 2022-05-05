@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabIOC", "LabIOC\LabIOC.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabIOC.Tests", "LabIOC.Tests\LabIOC.Tests.csproj", "{EC32E1F7-2CEC-4A58-9074-E2CE8D6D6B0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabIOC.demo", "LabIOC.demo\LabIOC.demo.csproj", "{15411E56-95AD-4108-8900-5B26A316EB41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{EC32E1F7-2CEC-4A58-9074-E2CE8D6D6B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC32E1F7-2CEC-4A58-9074-E2CE8D6D6B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC32E1F7-2CEC-4A58-9074-E2CE8D6D6B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15411E56-95AD-4108-8900-5B26A316EB41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15411E56-95AD-4108-8900-5B26A316EB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15411E56-95AD-4108-8900-5B26A316EB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15411E56-95AD-4108-8900-5B26A316EB41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
