@@ -85,4 +85,18 @@ public class LabContainerFactoryTest
             _testee.Register(typeof(INotImplemented), typeof(IocTestClass));
         });
     }
+    
+    [Fact]
+    public void Register_TypeWithGenerics_Succeeds()
+    {
+        var factory = LabContainerFactory.Create()
+            .Register<IocTestClass>();
+    }
+    
+    [Fact]
+    public void Register_InterfaceWithGenerics_Succeeds()
+    {
+        var factory = LabContainerFactory.Create()
+            .Register<IIocTest, IocTestClass>();
+    }
 }

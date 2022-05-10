@@ -22,6 +22,16 @@ public class LabContainerFactory
     {
         return Register(type, type);
     }
+    
+    public LabContainerFactory Register<TType>()
+    {
+        return Register(typeof(TType), typeof(TType));
+    }
+    
+    public LabContainerFactory Register<TInterface, TType>()
+    {
+        return Register(typeof(TInterface), typeof(TType));
+    }
 
     public LabContainerFactory Register(Type interfaceType, Type implementationType)
     {

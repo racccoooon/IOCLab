@@ -87,4 +87,14 @@ public class LabContainerTest
         var testee = factory.Build();
         testee.Get(typeof(Parent));
     }
+
+    [Fact]
+    public void Get_WithGenerics_Succeeds()
+    {
+        var factory = LabContainerFactory.Create()
+            .Register(typeof(IocTestClass));
+        var testee = factory.Build();
+        IocTestClass a = testee.Get<IocTestClass>();
+        a.Should().NotBeNull();
+    }
 }

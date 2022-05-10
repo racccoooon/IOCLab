@@ -4,30 +4,34 @@ namespace LabIOC;
 
 public class LabContainer
 {
-    private readonly List<IocMapping> _mappings;
+    private readonly Dictionary<Type, Type> _mappings;
 
     internal LabContainer(IEnumerable<IocMapping> mappings)
     {
-        _mappings = mappings.ToList();
+        _mappings = mappings.ToDictionary(x => x.InterfaceType,
+            x => x.ImplementationType);
     }
 
     public IEnumerable<IocMapping> GetMappings()
     {
-        return _mappings;
+        return _mappings.Keys.Select(x => new IocMapping(x, _mappings[x]));
     }
 
+    public TInterface Get<TInterface>()
+    {
+        return (TInterface) Get(typeof(TInterface));
+    }
+    
     public object Get(Type type)
     {
-        var mapping = _mappings.FirstOrDefault(x => x.InterfaceType == type);
-        if (mapping == null)
+        if (!_mappings.TryGetValue(type, out var mapping))
             throw new TypeNotRegisteredException(type);
 
-        if (mapping.ImplementationType.GetConstructors().Count() > 1)
+        if (mapping.GetConstructors().Count() > 1)
             throw new NoSuitableConstructorFoundException(type);
         
-        var constructor = mapping.ImplementationType.GetConstructors().FirstOrDefault();
-        if (constructor == null)
-            throw new NoSuitableConstructorFoundException(type);
+        var constructor = mapping.GetConstructors().FirstOrDefault()
+            ?? throw new NoSuitableConstructorFoundException(type);
 
         var parameters = new List<object>();
         foreach (var parameterInfo in constructor.GetParameters())
