@@ -2,12 +2,12 @@
 using LabIOC.demo;
 
 var labContainer = LabContainerFactory.Create()
-    .Register(typeof(ICar), typeof(Car))
-    .Register(typeof(IEngine), typeof(CarEngine))
-    .Register(typeof(ITurbo), typeof(DefaultTurbo))
+    .Register<ICar, Car>()
+    .Register<IEngine, CarEngine>()
+    .Register<ITurbo, DefaultTurbo>()
     .Build();
 
-var car = labContainer.Get(typeof(ICar));
+var car = labContainer.Get<ICar>();
 
 Console.WriteLine(car);
 
