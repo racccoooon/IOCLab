@@ -2,7 +2,7 @@
 
 namespace LabIOC;
 
-public class LabContainer
+public class LabContainer : IServiceProvider
 {
     private readonly Dictionary<Type, Type> _mappings;
 
@@ -42,5 +42,10 @@ public class LabContainer
         var result = constructor.Invoke(parameters.ToArray());
         return result;
         // return new IocTestClass();
+    }
+
+    public object? GetService(Type serviceType)
+    {
+        return Get(serviceType);
     }
 }

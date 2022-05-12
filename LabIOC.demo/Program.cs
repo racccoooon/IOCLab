@@ -10,4 +10,3 @@ var labContainer = LabContainerFactory.Create()
 var car = labContainer.Get<ICar>();
 
 Console.WriteLine(car);
-
