@@ -8,7 +8,7 @@
         <PackageVersion>1.0.1</PackageVersion>
         <Title>LabIOC</Title>
         <Authors>Juce, Darkarotte</Authors>
-        <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>11</LangVersion>
     </PropertyGroup>
 
