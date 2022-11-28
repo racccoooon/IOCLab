@@ -27,15 +27,15 @@ public interface ICar
     int CalculateHorsepower();
 }
 
-public class CarEngine : IEngine
+public class BasicEngine : IEngine
 {
     public double EnginePower()
     {
-        return 350;
+        return 100;
     }
 }
 
-public class MotorcycleEngine : IEngine
+public class BigEngine : IEngine
 {
     public double EnginePower()
     {

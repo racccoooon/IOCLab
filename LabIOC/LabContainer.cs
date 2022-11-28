@@ -27,7 +27,7 @@ public class LabContainer : IServiceProvider
         if (!_mappings.TryGetValue(type, out var mapping))
             throw new TypeNotRegisteredException(type);
 
-        if (mapping.GetConstructors().Count() > 1)
+        if (mapping.GetConstructors().Length > 1)
             throw new NoSuitableConstructorFoundException(type);
         
         var constructor = mapping.GetConstructors().FirstOrDefault()
